@@ -8,18 +8,16 @@ ENV PATH=$MAVEN_HOME/bin:$PATH
 # Step 1 - Update packages
 RUN yum update -y
 
-# Step 2 - Install wget and tar
-RUN yum install -y wget tar
+# Step 2 - Install tar
+RUN yum install -y tar
 
-# Step 3 - Download Maven
-RUN wget https://archive.apache.org/dist/maven/maven-3/3.5.2/binaries/apache-maven-3.5.2-bin.tar.gz
+# Step 3 - Copy Maven from local and extract
+COPY apache-maven-3.5.2-bin.tar.gz /tmp/maven.tar.gz
+RUN tar -xzf /tmp/maven.tar.gz -C /opt && \
+    rm /tmp/maven.tar.gz
 
-# Step 4 - Extract Maven
-RUN tar -xzf apache-maven-3.5.2-bin.tar.gz -C /opt
-
-# Step 5 - Add to PATH and clean up
-RUN echo "export PATH=/opt/apache-maven-3.5.2/bin:$PATH" >> ~/.bashrc && \
-    rm apache-maven-3.5.2-bin.tar.gz
+# Step 4 - Add to PATH
+RUN echo "export PATH=/opt/apache-maven-3.5.2/bin:$PATH" >> ~/.bashrc
 
 # Verify
 RUN java -version && mvn -version
