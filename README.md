@@ -1,2 +1,2 @@
 # CICD-Pipeline-w-Docker-Deployment
-A CICD pipeline allowing us to automate the workflow of our web application.  
+Java web application deployed on an EC2 instance within a CICD pipeline automating end to end workflow 
