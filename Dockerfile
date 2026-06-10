@@ -9,7 +9,7 @@ ENV PATH=$MAVEN_HOME/bin:$PATH
 RUN yum update -y
 
 # Step 2 - Install tar
-RUN yum install -y tar
+RUN yum install -y tar gzip
 
 # Step 3 - Copy Maven from local and extract
 COPY apache-maven-3.5.2-bin.tar.gz /tmp/maven.tar.gz
